@@ -96,7 +96,7 @@ This ensures resilience, independence, and long-term sustainability.
     * The client then constructs the **new** `*aid` string using the **new revision number**.
     * The client uploads the avatar **only to its own provider's hub** (typically via a POST request), with filename **Unique User Hash**. \
       In the hub URL, the decoded **user hash** part of the `*aid`, represented as a lowercase hex string (excluding the provider prefix) is used as the filename **without extension**, e.g.: \
-      `https://avatars.goldclient.com/{decoded_hash}` \
+      `http://public.goldclient.live/avatars/{decoded_hash}` \
       The actual file format is negotiated later using HTTP `Accept` headers.
     * Upon successful upload, the client begins broadcasting the new `*aid` (with the incremented revision) in its `userinfo`.
 
@@ -109,7 +109,7 @@ This ensures resilience, independence, and long-term sustainability.
     "services": {
       "avatar": {
         "providers": {
-          "G": { "url": "http://avatars.goldclient.com/" },
+          "G": { "url": "http://public.goldclient.live/avatars/" },
           "N": { "url": "http://avatars.nextclient.com/" },
           "S": { "url": "https://steamcommunity.com/profiles/{*sid}?xml=1" },
           "X": { "url": "TBD" }
@@ -128,7 +128,7 @@ This ensures resilience, independence, and long-term sustainability.
       ```
 
       Example (revision = 0, no query parameter): \
-      `http://avatars.goldclient.com/46e9998a3285533a`
+      `http://public.goldclient.live/avatars/46e9998a3285533a`
       <br/><br/>
 
       If the revision counter is greater than zero, it is appended as a cache-busting query parameter:
@@ -138,7 +138,7 @@ This ensures resilience, independence, and long-term sustainability.
       ```
 
       Example (revision = 150): \
-      `http://avatars.goldclient.com/46e9998a3285533a?v=150` \
+      `http://public.goldclient.live/avatars/46e9998a3285533a?v=150` \
       This design ensures that the avatar file itself remains immutable, while the revision acts as a lightweight cache-buster across clients and CDNs.
       <br/><br/>
 
@@ -230,7 +230,7 @@ This collaborative approach allows all participating communities to benefit from
 
 ## Provider status
 
-- `G` → GoldClient  (URL template <code style="color:dimgray">*TBD*</code>)
+- `G` → GoldClient  (URL template `http://public.goldclient.live/avatars/`)
 - `N` → NextClient  (URL template <code style="color:dimgray">*TBD*</code>)
 - `S` → SteamClient (URL template `https://steamcommunity.com/profiles/{*sid}?xml=1`)
 - More providers may join by defining their prefix and hub rules.

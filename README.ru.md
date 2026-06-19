@@ -96,7 +96,7 @@
     * Затем клиент конструирует **новый** `*aid`, используя **новый счетчик ревизии**.
     * Клиент загружает аватарку **только в хаб своего провайдера**, используя в качестве имени файла **Уникальный хэш пользователя**. \
       В URL хаба декодированная часть **хэша** из `*aid` (представленная как hex-строка) используется как имя файла **без расширения**, например: \
-      `https://avatars.goldclient.com/{decoded_hash}` \
+      `https://public.goldclient.live/avatars/{decoded_hash}` \
       Формат файла выбирается позже через заголовок HTTP `Accept`.
     * **После успешной загрузки**, клиент начинает передавать новый `*aid` (с увеличенной ревизией) в своем `userinfo`.
 
@@ -109,7 +109,7 @@
     "services": {
       "avatar": {
         "providers": {
-          "G": { "url": "http://avatars.goldclient.com/" },
+          "G": { "url": "http://public.goldclient.live/avatars/" },
           "N": { "url": "http://avatars.nextclient.com/" },
           "S": { "url": "https://steamcommunity.com/profiles/{*sid}?xml=1" },
           "X": { "url": "TBD" }
@@ -128,7 +128,7 @@
       ```
 
       Пример (ревизия = 0, без query-параметра): \
-      `http://avatars.goldclient.com/46e9998a3285533a`
+      `http://public.goldclient.live/avatars/46e9998a3285533a`
       <br/><br/>
 
       Если счетчик ревизии больше нуля, он добавляется как query-параметр для обхода кэша:
@@ -138,7 +138,7 @@
       ```
 
       Пример (ревизия = 150): \
-      `http://avatars.goldclient.com/46e9998a3285533a?v=150` \
+      `http://public.goldclient.live/avatars/46e9998a3285533a?v=150` \
       Такой подход гарантирует, что сам файл аватара остаётся неизменным, а ревизия выступает лёгким "кэш-бастером" для клиентов и CDN.
       <br/><br/>
 
@@ -230,7 +230,7 @@
 
 ## <a id="статус-провайдеров"></a>Статус провайдеров ##
 
-- `G` → GoldClient  (шаблон URL <code style="color:dimgray">*TBD*</code>)
+- `G` → GoldClient  (шаблон URL `http://public.goldclient.live/avatars/`)
 - `N` → NextClient  (шаблон URL <code style="color:dimgray">*TBD*</code>)
 - `S` → SteamClient (шаблон URL `https://steamcommunity.com/profiles/{steamid64}?xml=1`)
 - Другие провайдеры могут присоединиться, определив свой префикс и правила хаба.
